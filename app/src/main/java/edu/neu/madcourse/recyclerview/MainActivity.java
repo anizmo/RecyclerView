@@ -14,7 +14,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CallbackInterface {
 
     private List<Person> personList;
     private PersonAdapter personAdapter;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         personList = new ArrayList<>();
 
-        personAdapter = new PersonAdapter(personList, this);
+        personAdapter = new PersonAdapter(personList, this, this);
 
         peopleRecyclerView = findViewById(R.id.people_recycler_view);
 
@@ -38,11 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton floatingActionButton = findViewById(R.id.add_item);
 
-        //Setup action on the click of the floating action button.
+        // Setup action on the click of the floating action button.
         floatingActionButton.setOnClickListener(view -> {
             addItemToRecyclerView("John Doe", 18);
         });
 
+        // Add functionality of swipe to delete the recyclerview.
         setupSwipeToDelete();
 
     }
@@ -64,10 +65,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Setup a swipe to delete and attach it to the recyclerview
-     *
+     * Setup a swipe to delete and attach it to the recyclerview.
      */
     private void setupSwipeToDelete() {
+        // Create a new ItemTouchHelper in order to implement the swipe to delete functionality on
+        // the recyclerview.
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.RIGHT,
                 ItemTouchHelper.RIGHT) {
             @Override
@@ -87,10 +89,15 @@ public class MainActivity extends AppCompatActivity {
                 // Notify the adapter that the swiped item is removed from the array list.
                 personAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
 
+                // Notify the user that the item is deleted through a snackbar.
                 Snackbar.make(peopleRecyclerView, "Item Deleted", Snackbar.LENGTH_SHORT).show();
             }
 
         }).attachToRecyclerView(peopleRecyclerView);
     }
 
+    @Override
+    public void onPersonItemClicked(Person person) {
+        Snackbar.make(peopleRecyclerView, person.getName(), Snackbar.LENGTH_SHORT).show();
+    }
 }
