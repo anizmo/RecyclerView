@@ -32,7 +32,8 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonViewHolder> {
         holder.age.setText(String.valueOf(people.get(position).getAge()));
 
         holder.itemView.setOnClickListener(view -> {
-            Toast.makeText(context, people.get(position).getName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, position + ". " + people.get(position).getName(),
+                    Toast.LENGTH_SHORT).show();
         });
     }
 

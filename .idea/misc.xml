@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/btn_plus.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14387031408308004" />
         <entry key="app/src/main/res/layout/item_person.xml" value="0.165" />
       </map>
