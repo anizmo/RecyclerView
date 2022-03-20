@@ -98,6 +98,12 @@ public class MainActivity extends AppCompatActivity implements CallbackInterface
 
     @Override
     public void onPersonItemClicked(Person person) {
+        // As we are using the peopleRecyclerView as the view to show the snackbar, we require the
+        // click event to be recorded in the MainActivity file rather than just the adapter. It is
+        // because of this reason that we use the CallbackInterface.
+        //
+        // Exercise: Try to edit this method and display the recyclerview position and the name
+        // of the person in the snackbar.
         Snackbar.make(peopleRecyclerView, person.getName(), Snackbar.LENGTH_SHORT).show();
     }
 }
