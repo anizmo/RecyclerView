@@ -1,38 +1,33 @@
 package edu.neu.madcourse.recyclerview;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
-    RecyclerView peopleRecyclerView;
-
-    List<Person> personList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Instantiate the arraylist
-        personList = new ArrayList<>();
+        // 2 Buttons, one to navigate to each activity
+        Button recyclerViewButton = findViewById(R.id.buttonRecyclerView);
+        Button userInputButton = findViewById(R.id.buttonUserInput);
 
-        //Adding a new person object to the personList arrayList
-        personList.add(new Person("John Doe", 18));
+        recyclerViewButton.setOnClickListener(view -> {
+            // Open Recyclerview activity : This example shows how to make a simple recyclerview.
+            Intent intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
+            startActivity(intent);
+        });
 
-        peopleRecyclerView = findViewById(R.id.people_recycler_view);
-
-        //This defines the way in which the RecyclerView is oriented
-        peopleRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //Associates the adapter with the RecyclerView
-        peopleRecyclerView.setAdapter(new PersonAdapter(personList, this));
+        userInputButton.setOnClickListener(view -> {
+            // Open User Input Activity : This example shows how to take input from the end-user
+            Intent intent = new Intent(MainActivity.this, UserInputActivity.class);
+            startActivity(intent);
+        });
 
     }
 }
